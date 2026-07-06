@@ -3,14 +3,19 @@
 ## 概要図
 
 ```mermaid
+%%{init: {'flowchart': {'htmlLabels': true, 'wrap': true}, 'securityLevel': 'loose'}}%%
 graph TB
+    classDef Machine fill:#22FF88,fill-opacity:0.2,font-weight:bold
+    classDef Tools fill:#2288FF,fill-opacity:0.2
+    classDef Description fill:#FFFFFF
+
     subgraph ClientSetUpper ["クライアントセットアッパー"]
-        SetUpperTools["Ansible"]
-        SetUpperDescription["クラスタセットアップを行うマシン"]
+        SetUpperTools["ansible"]
+        SetUpperDescription["クライアントセットアップを行うマシン"]
     end
 
     subgraph ClusterSetUpper ["クラスターセットアッパー"]
-        ClientTools["N"]
+        ClientTools["ansible</br>kubectl</br>helm</br>etc..."]
         ClientDescription["クラスタセットアップを行うマシン"]
     end
     
@@ -19,5 +24,12 @@ graph TB
     end
     
     ClientSetUpper --> ClusterSetUpper --> K8sCluster
+
+    class SetUpperTools Tools
+    class ClientTools Tools
+    class ClusterSetUpper Machine
+    class ClientSetUpper Machine
+    class SetUpperDescription Description
+    class ClientDescription Description
 ```
 
