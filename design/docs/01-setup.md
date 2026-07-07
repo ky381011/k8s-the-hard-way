@@ -20,7 +20,7 @@ graph TB
     end
     
     subgraph K8sCluster ["Kubernetesクラスタ"]
-        K8sTools["ansible</br>kubectl</br>helm</br>etc..."]
+        K8sTools["kubelet</br>kubeproxy</br>etcd</br>etc..."]
         K8sDescription["K8Sのマスター＋ワーカー"]
     end
     
@@ -37,5 +37,7 @@ graph TB
     class K8sDescription Description
 ```
 
-## 
-
+## 役割
+### クライアントセットアッパー
+kubenetesクラスターを構築するマシンに対してセットアップを行うマシン
+Ansibleのみインストールしクラスタのセットアップに必要なツールはインストールしない
