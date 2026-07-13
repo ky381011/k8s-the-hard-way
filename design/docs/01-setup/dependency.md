@@ -1,12 +1,11 @@
 # Set Up 設計
 
 ## リスト
-| Layer | Role | Name |
-|-|-|-|
-|管理用|クラスタ構築用のコードを開発・実行するマシン|admin|
-|クラスタ構築環境|Ansible、Terraform、kubeadm などでクラスタを構築する仕組み|bootstrap|
-|Kubernetesクラスタ|実際に稼働するクラスタ|cluster|
-
+| Layer              | Role                                                       | Name      |
+| ------------------ | ---------------------------------------------------------- | --------- |
+| 管理用             | クラスタ構築用のコードを開発・実行するマシン               | admin     |
+| クラスタ構築環境   | Ansible、Terraform、kubeadm などでクラスタを構築する仕組み | bootstrap |
+| Kubernetesクラスタ | 実際に稼働するクラスタ                                     | cluster   |
 
 ## 概要図
 
@@ -17,40 +16,40 @@ graph TB
     classDef Tools fill:#2288FF,fill-opacity:0.2
     classDef Description fill:#FFFFFF
 
-    subgraph ClientSetUpper ["クライアントセットアッパー"]
-        SetUpperTools["ansible"]
-        SetUpperDescription["クライアントセットアップを行うマシン"]
+    subgraph admin ["クライアントセットアッパー"]
+        adminTools["ansible"]
+        adminDescription["クライアントセットアップを行うマシン"]
     end
 
-    subgraph ClusterSetUpper ["クラスターセットアッパー"]
-        ClientTools["ansible</br>kubectl</br>helm</br>etc..."]
-        ClientDescription["クラスタセットアップを行うマシン"]
+    subgraph bootstrap ["クラスターセットアッパー"]
+        bootstrapTools["ansible</br>kubectl</br>helm</br>etc..."]
+        bootstrapDescription["クラスタセットアップを行うマシン"]
     end
     
-    subgraph K8sCluster ["Kubernetesクラスタ"]
-        K8sTools["kubelet</br>kubeproxy</br>etcd</br>etc..."]
-        K8sDescription["K8Sのマスター＋ワーカー"]
+    subgraph cluster ["Kubernetesクラスタ"]
+        clusterTools["kubelet</br>kubeproxy</br>etcd</br>etc..."]
+        clusterDescription["K8Sのマスター＋ワーカー"]
     end
     
-    ClientSetUpper --> ClusterSetUpper --> K8sCluster
+    admin --> bootstrap --> cluster
 
-    class ClusterSetUpper Machine
-    class ClientSetUpper Machine
-    class K8sCluster Machine
-    class SetUpperTools Tools
-    class ClientTools Tools
-    class K8sTools Tools
-    class SetUpperDescription Description
-    class ClientDescription Description
-    class K8sDescription Description
+    class bootstrap Machine
+    class admin Machine
+    class cluster Machine
+    class adminTools Tools
+    class bootstrapTools Tools
+    class clusterTools Tools
+    class adminDescription Description
+    class bootstrapDescription Description
+    class clusterDescription Description
 ```
 
 ## 役割
-### クライアントセットアッパー
+### admin
 kubernetesクラスターを構築するマシンに対してセットアップを行うマシン
 Ansibleのみインストールしクラスタのセットアップに必要なツールはインストールしない
 
-### クラスターセットアッパー
+### bootstrap
 kubernetesクラスターを構築するマシン
 クラスタには参加せずセットアップのみを行う
 
