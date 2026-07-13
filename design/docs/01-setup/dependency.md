@@ -1,5 +1,13 @@
 # Set Up 設計
 
+## リスト
+| Layer | Role | Name |
+|-|-|-|
+|管理用|クラスタ構築用のコードを開発・実行するマシン|admin|
+|クラスタ構築環境|Ansible、Terraform、kubeadm などでクラスタを構築する仕組み|bootstrap|
+|Kubernetesクラスタ|実際に稼働するクラスタ|cluster|
+
+
 ## 概要図
 
 ```mermaid
