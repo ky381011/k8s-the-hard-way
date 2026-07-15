@@ -55,7 +55,7 @@ Proxmox LXC コンテナ
 
 #### 実行環境
 ```
-セットアッパーコンテナ (起動時の状態)
+admin コンテナ (起動時の状態)
 ├─ Ansible: 設定済みで即実行可能
 ├─ SSH Agent: playbooks ディレクトリの鍵を自動ロード
 ├─ 作業用ユーザー: ansible (uid:1000)
