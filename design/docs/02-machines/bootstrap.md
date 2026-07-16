@@ -24,7 +24,7 @@ Kubernetesクラスターを構築するマシン
 ```
 Proxmox LXC コンテナ
 ├─ OS: Ubuntu 22.04 LTS
-├─ インストール: kubectl, kubeadm, kubelet
+├─ インストール: kubectl, kubelet, Ansible
 ├─ セットアップツール (管理対象)
 │  └─ Ansible により adminから制御
 └─ 設定ファイル (ボリュームマウント)
@@ -43,7 +43,7 @@ Proxmox LXC コンテナ
 #### インストール内容
 - **kubelet**: Kubernetes ノードエージェント
 - **kubectl**: Kubernetes クラスター操作
-- **kubeadm**: クラスター初期化ツール
+- **Ansible**: クラスタノード管理
 - **cfssl**: 証明書生成ツール
 - **etcdctl**: etcd 管理ツール
 - **ランタイム依存**: containerd, Python 3, OpenSSH
