@@ -8,11 +8,11 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint = var.proxmox_endpoint
+  endpoint = var.provider_config.endpoint
 
   # APIトークン認証（推奨）
-  api_token = var.proxmox_api_token
+  api_token = var.provider_config.api_token
 
   # 自己署名証明書の場合
-  insecure = true
+  insecure = var.provider_config.insecure
 }
