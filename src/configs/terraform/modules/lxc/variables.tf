@@ -43,3 +43,16 @@ variable "rootfs" {
     error_message = "Both 'storage' and 'size' must be provided in the rootfs configuration."
   }
 }
+
+variable "network" {
+  description = "A list of maps containing the network configuration for the LXC container"
+  type = map(object({
+    name      = string
+    bridge    = string
+    ip        = string
+    gw        = string
+    type      = string
+    vlan      = number
+  }))
+  
+}
