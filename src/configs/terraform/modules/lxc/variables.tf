@@ -1,4 +1,4 @@
-variable "target_node" {
+variable "node_name" {
   description = "A string containing the cluster node name"
   type        = string
   default     = null
@@ -12,47 +12,45 @@ variable "hostname" {
   nullable    = false
 }
 
-variable "ostemplate" {
-  description = "A string containing the Proxmox LXC template name"
+variable "template_file_id" {
+  description = "A string containing the Proxmox LXC template file ID"
   type        = string
   default     = null
   nullable    = false
 }
 
-variable "rootfs" {
-  description = "A map containing the rootfs configuration for the LXC container"
+variable "disk" {
+  description = "A map containing the disk configuration for the LXC container"
   type = object({
-    storage = string
-    size    = string
+    datastore_id = string
+    size         = number
   })
   default = null
 
   validation {
-    condition     = var.rootfs != null 
-    error_message = "In order to create an LXC container, the rootfs configuration must be provided."
+    condition     = var.disk != null
+    error_message = "In order to create an LXC container, the disk configuration must be provided."
   }
 
   validation {
     condition = (
-    !can(var.rootfs.storage) ||
+      !can(var.disk.datastore_id) ||
       (
-        trimspace(var.rootfs.storage) != "" &&
-        trimspace(var.rootfs.size) != ""
+        trimspace(var.disk.datastore_id) != "" &&
+        var.disk.size > 0
       )
     )
-    error_message = "Both 'storage' and 'size' must be provided in the rootfs configuration."
+    error_message = "Both 'datastore_id' and 'size' must be provided in the disk configuration."
   }
 }
 
 variable "network" {
-  description = "A list of maps containing the network configuration for the LXC container"
+  description = "A map of network interface configurations for the LXC container"
   type = map(object({
-    name      = string
-    bridge    = string
-    ip        = string
-    gw        = string
-    type      = string
-    vlan      = number
+    name    = string
+    bridge  = string
+    address = string
+    gateway = string
+    vlan_id = number
   }))
-  
 }
