@@ -6,6 +6,7 @@ resource "proxmox_virtual_environment_container" "this" {
 
     dynamic "ip_config" {
       for_each = var.initialization.ip_config
+      iterator = ip_config
       content {
         ipv4 {
           address = ip_config.value.address
@@ -26,6 +27,7 @@ resource "proxmox_virtual_environment_container" "this" {
 
   dynamic "network_interface" {
     for_each = var.network
+    iterator = network_interface
     content {
       name    = network_interface.value.name
       bridge  = network_interface.value.bridge
