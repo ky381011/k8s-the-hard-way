@@ -5,11 +5,17 @@ variable "node_name" {
   nullable    = false
 }
 
-variable "hostname" {
-  description = "A string containing the hostname of the LXC container"
-  type        = string
-  default     = null
-  nullable    = false
+variable "initialization" {
+  description = "An object containing the initialization configuration for the LXC container"
+  type = object({
+    hostname = string
+    ip_config = list(object({
+      address = string
+      gateway = string
+    }))
+  })
+  default  = null
+  nullable = false
 }
 
 variable "template_file_id" {

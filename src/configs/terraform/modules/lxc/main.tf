@@ -2,10 +2,10 @@ resource "proxmox_virtual_environment_container" "this" {
   node_name = var.node_name
 
   initialization {
-    hostname = var.hostname
+    hostname = var.initialization.hostname
 
     dynamic "ip_config" {
-      for_each = var.network
+      for_each = var.initialization.ip_config
       content {
         ipv4 {
           address = ip_config.value.address
