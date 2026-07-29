@@ -16,6 +16,38 @@ variable "initialization" {
   })
   default  = null
   nullable = false
+
+  validation {
+    condition     = var.initialization != null
+    error_message = "In order to create an LXC container, the initialization configuration must be provided."
+  }
+
+  validation {
+    condition = (
+      !can(var.initialization.hostname) ||
+      trimspace(var.initialization.hostname) != ""
+    )
+    error_message = "The 'hostname' must not be empty."
+  }
+
+  validation {
+    condition = (
+      !can(var.initialization.ip_config) ||
+      length(var.initialization.ip_config) > 0
+    )
+    error_message = "At least one 'ip_config' entry must be provided."
+  }
+
+  validation {
+    condition = (
+      !can(var.initialization.ip_config) ||
+      alltrue([
+        for cfg in var.initialization.ip_config :
+        trimspace(cfg.address) != "" && trimspace(cfg.gateway) != ""
+      ])
+    )
+    error_message = "Each 'ip_config' entry must have non-empty 'address' and 'gateway'."
+  }
 }
 
 variable "template_file_id" {
