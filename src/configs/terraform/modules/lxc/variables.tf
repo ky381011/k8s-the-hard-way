@@ -17,11 +17,13 @@ variable "initialization" {
   default  = null
   nullable = false
 
+  # Ensures the initialization configuration is provided when creating an LXC container.
   validation {
     condition     = var.initialization != null
     error_message = "In order to create an LXC container, the initialization configuration must be provided."
   }
 
+  # Ensures the hostname is not an empty or whitespace-only string.
   validation {
     condition = (
       !can(var.initialization.hostname) ||
@@ -30,6 +32,7 @@ variable "initialization" {
     error_message = "The 'hostname' must not be empty."
   }
 
+  # Ensures at least one IP configuration entry is provided.
   validation {
     condition = (
       !can(var.initialization.ip_config) ||
@@ -38,6 +41,7 @@ variable "initialization" {
     error_message = "At least one 'ip_config' entry must be provided."
   }
 
+  # Ensures each IP configuration entry has non-empty 'address' and 'gateway' values.
   validation {
     condition = (
       !can(var.initialization.ip_config) ||
