@@ -54,11 +54,19 @@ variable "initialization" {
   }
 }
 
-variable "template_file_id" {
-  description = "A string containing the Proxmox LXC template file ID"
-  type        = string
-  default     = null
-  nullable    = false
+variable "operating_system" {
+  description = "An object containing the operating system configuration for the LXC container"
+  type = object({
+    template_file_id = string
+    type             = string
+  })
+  default  = null
+  nullable = false
+
+  validation {
+    condition     = var.operating_system != null
+    error_message = "The operating system configuration must be provided."
+  }
 }
 
 variable "disk" {

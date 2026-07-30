@@ -17,7 +17,8 @@ resource "proxmox_virtual_environment_container" "this" {
   }
 
   operating_system {
-    template_file_id = var.template_file_id
+    template_file_id = var.operating_system.template_file_id
+    type             = var.operating_system.type
   }
 
   disk {
