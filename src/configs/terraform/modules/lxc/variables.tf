@@ -69,6 +69,7 @@ variable "operating_system" {
   }
 }
 
+# Exactly one rootfs per container; use mount_point blocks for additional volumes.
 variable "disk" {
   description = "A map containing the disk configuration for the LXC container"
   type = object({
@@ -94,7 +95,7 @@ variable "disk" {
   }
 }
 
-variable "network" {
+variable "network_interface" {
   description = "A map of network interface configurations for the LXC container"
   type = map(object({
     name    = string

@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_container" "this" {
   }
 
   dynamic "network_interface" {
-    for_each = var.network
+    for_each = var.network_interface
     iterator = network_interface
     content {
       name    = network_interface.value.name
