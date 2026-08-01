@@ -26,6 +26,14 @@ resource "proxmox_virtual_environment_container" "this" {
     size         = var.disk.size
   }
 
+  dynamic "memory" {
+    for_each = var.memory != null ? [var.memory] : []
+    content {
+      dedicated = memory.value.dedicated
+      swap      = memory.value.swap
+    }
+  }
+
   dynamic "network_interface" {
     for_each = var.network_interface
     iterator = network_interface

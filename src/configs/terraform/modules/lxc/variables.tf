@@ -95,6 +95,23 @@ variable "disk" {
   }
 }
 
+variable "memory" {
+  description = "An object containing the memory configuration for the LXC container"
+  type = object({
+    dedicated = number
+    swap      = number
+  })
+  default = null
+
+  validation {
+    condition = (
+      var.memory == null ||
+      (var.memory.dedicated > 0 && var.memory.swap >= 0)
+    )
+    error_message = "'dedicated' must be greater than 0 and 'swap' must be 0 or greater."
+  }
+}
+
 variable "network_interface" {
   description = "A map of network interface configurations for the LXC container"
   type = map(object({
