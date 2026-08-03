@@ -9,7 +9,7 @@ variable "vm_id" {
   description = "A string containing the VM ID for the LXC container"
   type        = string
   default     = null
-  nullable    = false
+  nullable    = true
 }
 
 variable "initialization" {
