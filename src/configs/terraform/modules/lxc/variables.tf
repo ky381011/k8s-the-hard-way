@@ -5,6 +5,13 @@ variable "node_name" {
   nullable    = false
 }
 
+variable "vm_id" {
+  description = "A string containing the VM ID for the LXC container"
+  type        = string
+  default     = null
+  nullable    = false
+}
+
 variable "initialization" {
   description = "An object containing the initialization configuration for the LXC container"
   type = object({

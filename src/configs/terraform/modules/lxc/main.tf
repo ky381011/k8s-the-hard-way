@@ -1,5 +1,6 @@
 resource "proxmox_virtual_environment_container" "this" {
   node_name = var.node_name
+  vm_id     = var.vm_id
 
   initialization {
     hostname = var.initialization.hostname
