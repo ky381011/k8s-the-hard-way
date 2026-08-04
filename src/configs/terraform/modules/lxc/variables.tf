@@ -129,3 +129,13 @@ variable "network_interface" {
     vlan_id = number
   }))
 }
+
+variable "mount_point" {
+  description = "A list of mount point configurations for the LXC container"
+  type = list(object({
+    volume       = string
+    path         = string
+    size         = optional(number)
+  }))
+  default = []
+}

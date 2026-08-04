@@ -44,4 +44,14 @@ resource "proxmox_virtual_environment_container" "this" {
       vlan_id = network_interface.value.vlan_id
     }
   }
+
+  dynamic "mount_point" {
+    for_each = var.mount_point
+    iterator = mount_point
+    content {
+      volume = mount_point.value.volume
+      path   = mount_point.value.path
+      size   = mount_point.value.size
+    }
+  }
 }
