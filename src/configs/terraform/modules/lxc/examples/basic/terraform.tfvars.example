@@ -1,0 +1,13 @@
+proxmox_endpoint = "https://192.168.1.10:8006"
+proxmox_username = "root@pam"
+proxmox_password = "changeme"
+
+node_name        = "pve"
+vm_id            = "200"
+hostname         = "basic-lxc"
+ip_address       = "192.168.1.200/24"
+gateway          = "192.168.1.1"
+template_file_id = "local:vztmpl/debian-12-standard_12.2-1_amd64.tar.zst"
+datastore_id     = "local-lvm"
+disk_size        = 8
+bridge           = "vmbr0"
